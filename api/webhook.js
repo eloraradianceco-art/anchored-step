@@ -1,5 +1,5 @@
-import { createClient } from "@supabase/supabase-js";
 import Stripe from "stripe";
+import { createClient } from "@supabase/supabase-js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const supabase = createClient(
@@ -7,7 +7,6 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-// Generate a unique access code
 function generateCode() {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let code = "AS-";
@@ -15,6 +14,62 @@ function generateCode() {
     code += chars[Math.floor(Math.random() * chars.length)];
   }
   return code;
+}
+
+async function sendEmail(to, code, plan) {
+  const planLabel = plan === "annual" ? "Annual" : "Weekly";
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "Anchored Steps <noreply@eloraradiance.com>",
+      to: [to],
+      subject: "Your Anchored Steps Access Code",
+      html: `
+        <div style="background:#0b1825;padding:40px 20px;font-family:Georgia,serif;max-width:520px;margin:0 auto;border-radius:16px;">
+          <div style="text-align:center;margin-bottom:24px;">
+            <div style="font-size:36px;">⚓</div>
+            <h1 style="color:#ede3cd;font-size:22px;margin:8px 0 4px;font-family:Georgia,serif;">Anchored Steps</h1>
+            <p style="color:#7e92a2;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;margin:0;">52 Weeks of Faith in Action</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(180,140,60,0.28);border-radius:12px;padding:28px;margin-bottom:24px;">
+            <p style="color:#d8cfc0;font-size:16px;line-height:1.7;margin:0 0 20px;">Thank you for subscribing to Anchored Steps (${planLabel} Plan). Your unique access code is below:</p>
+            <div style="background:rgba(180,140,60,0.1);border:1px solid rgba(180,140,60,0.4);border-radius:10px;padding:18px;text-align:center;margin-bottom:20px;">
+              <div style="color:#7e92a2;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;font-family:Georgia,serif;">Your Access Code</div>
+              <div style="color:#c9a84c;font-size:28px;font-weight:bold;letter-spacing:0.15em;font-family:Georgia,serif;">${code}</div>
+            </div>
+            <p style="color:#7e92a2;font-size:13px;line-height:1.6;margin:0 0 20px;">Keep this code safe — you will need it to create your account. Each code can only be used once.</p>
+            <div style="text-align:center;">
+              <a href="https://anchored-steps.vercel.app" style="display:inline-block;background:linear-gradient(135deg,rgba(180,140,60,0.4),rgba(180,140,60,0.2));border:1px solid rgba(180,140,60,0.5);color:#c9a84c;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;letter-spacing:0.08em;font-family:Georgia,serif;">Open Your Journal &#8594;</a>
+            </div>
+          </div>
+          <div style="text-align:center;">
+            <p style="color:#3e5060;font-size:12px;line-height:1.6;font-style:italic;margin:0;">"Walk steadily. Stay anchored. Trust God with every step."</p>
+            <p style="color:#3e5060;font-size:11px;margin:8px 0 0;">Elora Radiance Co. &mdash; eloraradiance.com</p>
+          </div>
+        </div>
+      `,
+    }),
+  });
+
+  if (!response.ok) {
+    const err = await response.json();
+    console.error("Resend error:", err);
+    throw new Error("Failed to send email");
+  }
+
+  return response.json();
+}
+
+async function buffer(req) {
+  const chunks = [];
+  for await (const chunk of req) {
+    chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
+  }
+  return Buffer.concat(chunks);
 }
 
 export default async function handler(req, res) {
@@ -37,24 +92,25 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Webhook signature failed" });
   }
 
-  // Only handle successful payments
-  if (event.type !== "checkout.session.completed" &&
-      event.type !== "invoice.payment_succeeded") {
+  if (
+    event.type !== "checkout.session.completed" &&
+    event.type !== "invoice.payment_succeeded"
+  ) {
     return res.status(200).json({ received: true });
   }
 
   const session = event.data.object;
-  const customerEmail = session.customer_email ||
-    session.customer_details?.email;
+  const customerEmail =
+    session.customer_email || session.customer_details?.email;
 
   if (!customerEmail) {
     console.error("No customer email found");
     return res.status(200).json({ received: true });
   }
 
-  // Determine plan from price/amount
+  // Determine plan from amount
   const amount = session.amount_total || session.amount_paid;
-  const plan = amount <= 200 ? "weekly" : "annual"; // $1.50 = 150 cents, $39 = 3900 cents
+  const plan = amount <= 200 ? "weekly" : "annual";
 
   // Generate unique code
   let code;
@@ -66,33 +122,28 @@ export default async function handler(req, res) {
       .select("code")
       .eq("code", code)
       .single();
-    if (!data) break; // Code is unique
+    if (!data) break;
     attempts++;
   }
 
-  // Save code to Supabase
+  // Save to Supabase
   const { error: insertError } = await supabase
     .from("access_codes")
-    .insert({
-      code,
-      plan,
-      used: false,
-    });
+    .insert({ code, plan, used: false });
 
   if (insertError) {
     console.error("Failed to insert code:", insertError);
     return res.status(500).json({ error: "Failed to create access code" });
   }
 
-  console.log(`Created code ${code} for ${customerEmail} (${plan})`);
-  return res.status(200).json({ received: true, code });
-}
-
-// Helper to get raw body for Stripe signature verification
-async function buffer(req) {
-  const chunks = [];
-  for await (const chunk of req) {
-    chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
+  // Send email via Resend
+  try {
+    await sendEmail(customerEmail, code, plan);
+    console.log(`Code ${code} sent to ${customerEmail}`);
+  } catch (emailErr) {
+    console.error("Email failed:", emailErr);
+    // Don't fail the webhook if email fails - code is still in Supabase
   }
-  return Buffer.concat(chunks);
+
+  return res.status(200).json({ received: true });
 }
