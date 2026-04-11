@@ -129,7 +129,7 @@ function AuthScreen({onAuth}) {
     if (!email) { setError("Enter your email first."); return; }
     setLoading(true);
     await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: window.location.origin,
+      redirectTo: "https://anchored-steps.vercel.app/reset-password",
     });
     setMsg("Check your email for a reset link.");
     setLoading(false);
