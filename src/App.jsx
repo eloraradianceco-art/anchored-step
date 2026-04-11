@@ -160,9 +160,23 @@ function AuthScreen({onAuth}) {
           {" · "}
           <span onClick={()=>{setScreen("signup");setError("");}} style={{color:G.gold,cursor:"pointer"}}>New subscriber</span>
         </div>
-        <div style={{marginTop:20,textAlign:"center",fontSize:12,color:G.dim,lineHeight:1.6}}>
-          Don&#8217;t have an account?{" "}
-          <a href="https://buy.stripe.com/9B69ASezO3Xo5uveIb57W00" target="_blank" rel="noreferrer" style={{color:G.gold,textDecoration:"none"}}>Subscribe &#8594;</a>
+        <div style={{marginTop:24,borderTop:"1px solid rgba(255,255,255,0.06)",paddingTop:20}}>
+          <div style={{fontFamily:"Cinzel,serif",fontSize:10,color:G.muted,letterSpacing:"0.14em",textTransform:"uppercase",textAlign:"center",marginBottom:14}}>New Subscriber? Choose Your Plan</div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+            <a href="https://buy.stripe.com/28E8wO63i51s8GH1Vp57W02" target="_blank" rel="noreferrer" style={{textDecoration:"none",display:"block",background:"rgba(180,140,60,0.07)",border:"1px solid "+G.goldB,borderRadius:12,padding:"14px 12px",textAlign:"center"}}>
+              <div style={{fontFamily:"Cinzel,serif",fontSize:11,color:G.gold,letterSpacing:"0.08em",marginBottom:4}}>Weekly</div>
+              <div style={{fontSize:22,fontWeight:600,color:G.cream,fontFamily:"Cinzel,serif",marginBottom:2}}>$1.50</div>
+              <div style={{fontSize:10,color:G.muted}}>per week</div>
+              <div style={{marginTop:10,background:"rgba(180,140,60,0.15)",borderRadius:6,padding:"6px",fontSize:11,color:G.gold,fontFamily:"Cinzel,serif"}}>Subscribe &#8594;</div>
+            </a>
+            <a href="https://buy.stripe.com/dRmbJ09fu51s9KLgQj57W01" target="_blank" rel="noreferrer" style={{textDecoration:"none",display:"block",background:"rgba(180,140,60,0.12)",border:"1px solid "+G.goldB,borderRadius:12,padding:"14px 12px",textAlign:"center",position:"relative"}}>
+              <div style={{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:G.gold,color:"#0b1825",fontSize:9,fontFamily:"Cinzel,serif",padding:"2px 10px",borderRadius:20,whiteSpace:"nowrap",fontWeight:600}}>SAVE 50%</div>
+              <div style={{fontFamily:"Cinzel,serif",fontSize:11,color:G.gold,letterSpacing:"0.08em",marginBottom:4}}>Annual</div>
+              <div style={{fontSize:22,fontWeight:600,color:G.cream,fontFamily:"Cinzel,serif",marginBottom:2}}>$39</div>
+              <div style={{fontSize:10,color:G.muted}}>per year</div>
+              <div style={{marginTop:10,background:"rgba(180,140,60,0.25)",borderRadius:6,padding:"6px",fontSize:11,color:G.gold,fontFamily:"Cinzel,serif"}}>Subscribe &#8594;</div>
+            </a>
+          </div>
         </div>
       </div>
     </div>
