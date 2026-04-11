@@ -126,10 +126,10 @@ module.exports = async function handler(req, res) {
     attempts++;
   }
 
-  // Save to Supabase
+  // Save to Supabase (customer_email triggers the email via database trigger)
   const { error: insertError } = await supabase
     .from("access_codes")
-    .insert({ code, plan, used: false });
+    .insert({ code, plan, used: false, customer_email: customerEmail });
 
   if (insertError) {
     console.error("Failed to insert code:", insertError);
