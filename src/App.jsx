@@ -19,12 +19,12 @@ const SECTIONS = [
 ];
 
 const G = {
-  bg:"#0b1825",bgCard:"rgba(255,255,255,0.032)",bgMid:"#132030",
-  gold:"#c9a84c",goldL:"#e2c86a",goldF:"rgba(180,140,60,0.1)",goldB:"rgba(180,140,60,0.28)",
-  green:"#78b878",greenF:"rgba(120,184,120,0.09)",greenB:"rgba(120,184,120,0.28)",
-  purple:"#9e88c4",purpleF:"rgba(158,136,196,0.08)",purpleB:"rgba(158,136,196,0.22)",
-  red:"#e07070",redF:"rgba(220,100,100,0.08)",redB:"rgba(220,100,100,0.25)",
-  cream:"#ede3cd",text:"#d8cfc0",muted:"#7e92a2",dim:"#3e5060",border:"rgba(255,255,255,0.075)",
+  bg:"#0F1A24",bgCard:"rgba(255,255,255,0.035)",bgMid:"#1A2A38",
+  gold:"#B08A4E",goldL:"#D6B97A",goldF:"rgba(176,138,78,0.12)",goldB:"rgba(176,138,78,0.28)",
+  green:"#7C9284",greenF:"rgba(124,146,132,0.12)",greenB:"rgba(124,146,132,0.28)",
+  purple:"#A89ACF",purpleF:"rgba(168,154,207,0.08)",purpleB:"rgba(168,154,207,0.22)",
+  red:"#D97A7A",redF:"rgba(217,122,122,0.08)",redB:"rgba(217,122,122,0.24)",
+  cream:"#F5F1E8",text:"#E6DED0",muted:"#A8B3BC",dim:"#6C7A86",border:"rgba(255,255,255,0.06)",
 };
 
 const INP_STYLE = {width:"100%",background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.12)",borderRadius:8,color:G.cream,fontSize:16,padding:"12px 14px",outline:"none",fontFamily:"EB Garamond,Georgia,serif",marginBottom:12};
@@ -47,7 +47,7 @@ function calcStreak(entries) {
 
 function SaveBtn({onSave, flash}) {
   return (
-    <button onClick={onSave} style={{marginTop:16,background:flash?"rgba(120,184,120,0.12)":"rgba(180,140,60,0.09)",border:"1px solid "+(flash?"rgba(120,184,120,0.32)":"rgba(180,140,60,0.28)"),color:flash?G.green:G.gold,padding:"8px 18px",borderRadius:8,cursor:"pointer",fontSize:12,fontFamily:"Cinzel,serif",letterSpacing:"0.08em",transition:"all .3s"}}>
+    <button onClick={onSave} style={{marginTop:20,background:flash?"rgba(124,146,132,0.14)":"linear-gradient(135deg,rgba(176,138,78,0.24),rgba(176,138,78,0.10))",border:"1px solid "+(flash?"rgba(124,146,132,0.35)":"rgba(176,138,78,0.30)"),color:flash?G.green:G.gold,padding:"11px 22px",borderRadius:10,cursor:"pointer",fontSize:12,fontFamily:"Cinzel,serif",letterSpacing:"0.08em",transition:"all .25s ease"}}>
       {flash ? "✓ Saved" : "Save Entry"}
     </button>
   );
@@ -67,7 +67,7 @@ function AuthScreen({onAuth}) {
 
   const wrap = style => ({
     minHeight:"100vh",
-    background:"linear-gradient(155deg,#0b1825 0%,#132030 55%,#0b1825 100%)",
+    background:"linear-gradient(155deg,#0F1A24 0%,#1A2A38 55%,#0F1A24 100%)",
     display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",
     padding:"24px",fontFamily:"EB Garamond,Georgia,serif",color:G.text,
     ...style
@@ -155,29 +155,46 @@ function AuthScreen({onAuth}) {
         <button onClick={handleLogin} disabled={loading} style={{width:"100%",background:"linear-gradient(135deg,rgba(180,140,60,0.3),rgba(180,140,60,0.15))",border:"1px solid "+G.goldB,color:G.gold,padding:"12px",borderRadius:8,cursor:"pointer",fontSize:14,fontFamily:"Cinzel,serif",letterSpacing:"0.1em",marginBottom:12}}>
           {loading ? "Signing in..." : "Sign In"}
         </button>
-        <div style={{textAlign:"center",fontSize:13,color:G.muted}}>
+        <div style={{textAlign:"center",fontSize:13,color:G.muted,marginBottom:12}}>
           <span onClick={handleReset} style={{color:G.gold,cursor:"pointer",textDecoration:"none"}}>Forgot password?</span>
-          {" · "}
-          <span onClick={()=>{setScreen("signup");setError("");}} style={{color:G.gold,cursor:"pointer"}}>New subscriber</span>
         </div>
-        <div style={{marginTop:24,borderTop:"1px solid rgba(255,255,255,0.06)",paddingTop:20}}>
-          <div style={{fontFamily:"Cinzel,serif",fontSize:10,color:G.muted,letterSpacing:"0.14em",textTransform:"uppercase",textAlign:"center",marginBottom:14}}>New Subscriber? Choose Your Plan</div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-            <a href="https://buy.stripe.com/9B6fZg8bqalMe117fJ57W03" target="_blank" rel="noreferrer" style={{textDecoration:"none",display:"block",background:"rgba(180,140,60,0.07)",border:"1px solid "+G.goldB,borderRadius:12,padding:"14px 12px",textAlign:"center"}}>
-              <div style={{fontFamily:"Cinzel,serif",fontSize:11,color:G.gold,letterSpacing:"0.08em",marginBottom:4}}>Monthly</div>
-              <div style={{fontSize:22,fontWeight:600,color:G.cream,fontFamily:"Cinzel,serif",marginBottom:2}}>$1.50</div>
-              <div style={{fontSize:10,color:G.muted}}>per month</div>
-              <div style={{marginTop:10,background:"rgba(180,140,60,0.15)",borderRadius:6,padding:"6px",fontSize:11,color:G.gold,fontFamily:"Cinzel,serif"}}>Subscribe &#8594;</div>
-            </a>
-            <a href="https://buy.stripe.com/dRmbJ09fu51s9KLgQj57W01" target="_blank" rel="noreferrer" style={{textDecoration:"none",display:"block",background:"rgba(180,140,60,0.12)",border:"1px solid "+G.goldB,borderRadius:12,padding:"14px 12px",textAlign:"center",position:"relative"}}>
-              <div style={{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:G.gold,color:"#0b1825",fontSize:9,fontFamily:"Cinzel,serif",padding:"2px 10px",borderRadius:20,whiteSpace:"nowrap",fontWeight:600}}>SAVE 50%</div>
-              <div style={{fontFamily:"Cinzel,serif",fontSize:11,color:G.gold,letterSpacing:"0.08em",marginBottom:4}}>Annual</div>
-              <div style={{fontSize:22,fontWeight:600,color:G.cream,fontFamily:"Cinzel,serif",marginBottom:2}}>$39</div>
-              <div style={{fontSize:10,color:G.muted}}>per year</div>
-              <div style={{marginTop:10,background:"rgba(180,140,60,0.25)",borderRadius:6,padding:"6px",fontSize:11,color:G.gold,fontFamily:"Cinzel,serif"}}>Subscribe &#8594;</div>
-            </a>
-          </div>
+        <button onClick={()=>{setScreen("signup");setError("");}} style={{width:"100%",background:"transparent",border:"1px solid rgba(176,138,78,0.25)",color:G.text,padding:"11px",borderRadius:8,cursor:"pointer",fontSize:14,fontFamily:"EB Garamond,Georgia,serif",marginBottom:10,transition:"all .2s"}}>
+          Create Account
+        </button>
+        <button onClick={()=>setScreen("plans")} style={{width:"100%",background:"transparent",border:"1px solid rgba(255,255,255,0.06)",color:G.muted,padding:"11px",borderRadius:8,cursor:"pointer",fontSize:13,fontFamily:"EB Garamond,Georgia,serif",transition:"all .2s"}}>
+          View Plans &#8594;
+        </button>
+      </div>
+    </div>
+  );
+
+  if (screen === "plans") return (
+    <div style={wrap()}>
+      <div style={{fontSize:32,color:G.gold,marginBottom:12}}>&#9875;</div>
+      <div style={{fontFamily:"Cinzel,serif",fontSize:20,fontWeight:600,color:G.cream,marginBottom:4}}>Choose Your Plan</div>
+      <div style={{fontSize:13,color:G.muted,fontStyle:"italic",marginBottom:28,textAlign:"center"}}>Subscribe to receive your access code instantly by email.</div>
+      <div style={{width:"100%",maxWidth:400}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:20}}>
+          <a href="https://buy.stripe.com/9B6fZg8bqalMe117fJ57W03" target="_blank" rel="noreferrer" style={{textDecoration:"none",display:"block",background:"linear-gradient(145deg,rgba(176,138,78,0.1),rgba(176,138,78,0.04))",border:"1px solid rgba(176,138,78,0.28)",borderRadius:14,padding:"24px 16px",textAlign:"center"}}>
+            <div style={{fontFamily:"Cinzel,serif",fontSize:12,color:G.gold,letterSpacing:"0.1em",marginBottom:10}}>Monthly</div>
+            <div style={{fontSize:32,fontWeight:600,color:G.cream,fontFamily:"Cinzel,serif",marginBottom:4}}>$1.50</div>
+            <div style={{fontSize:12,color:G.muted,marginBottom:16}}>per month</div>
+            <div style={{background:"rgba(176,138,78,0.2)",border:"1px solid rgba(176,138,78,0.3)",borderRadius:8,padding:"10px",fontSize:13,color:G.gold,fontFamily:"EB Garamond,Georgia,serif"}}>Subscribe &#8594;</div>
+          </a>
+          <a href="https://buy.stripe.com/dRmbJ09fu51s9KLgQj57W01" target="_blank" rel="noreferrer" style={{textDecoration:"none",display:"block",background:"linear-gradient(145deg,rgba(176,138,78,0.16),rgba(176,138,78,0.07))",border:"1px solid rgba(176,138,78,0.4)",borderRadius:14,padding:"24px 16px",textAlign:"center",position:"relative"}}>
+            <div style={{position:"absolute",top:-12,left:"50%",transform:"translateX(-50%)",background:G.gold,color:"#0F1A24",fontSize:9,fontFamily:"Cinzel,serif",padding:"3px 12px",borderRadius:20,whiteSpace:"nowrap",fontWeight:700,letterSpacing:"0.08em"}}>BEST VALUE</div>
+            <div style={{fontFamily:"Cinzel,serif",fontSize:12,color:G.gold,letterSpacing:"0.1em",marginBottom:10}}>Full Year Access</div>
+            <div style={{fontSize:32,fontWeight:600,color:G.cream,fontFamily:"Cinzel,serif",marginBottom:4}}>$39</div>
+            <div style={{fontSize:12,color:G.muted,marginBottom:16}}>full year &#8212; $3.25/mo</div>
+            <div style={{background:"rgba(176,138,78,0.3)",border:"1px solid rgba(176,138,78,0.45)",borderRadius:8,padding:"10px",fontSize:13,color:G.gold,fontFamily:"EB Garamond,Georgia,serif"}}>Subscribe &#8594;</div>
+          </a>
         </div>
+        <div style={{background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:12,padding:"16px",marginBottom:20,textAlign:"center"}}>
+          <p style={{fontSize:13,color:G.muted,lineHeight:1.7,margin:0}}>After subscribing, check your email for your unique access code. Then return here and tap <strong style={{color:G.text}}>Create Account</strong> to get started.</p>
+        </div>
+        <button onClick={()=>setScreen("login")} style={{width:"100%",background:"transparent",border:"none",color:G.muted,padding:"8px",cursor:"pointer",fontSize:13,fontFamily:"EB Garamond,Georgia,serif"}}>
+          &#8592; Back to Sign In
+        </button>
       </div>
     </div>
   );
@@ -199,9 +216,11 @@ function AuthScreen({onAuth}) {
         <button onClick={handleSignup} disabled={loading} style={{width:"100%",background:"linear-gradient(135deg,rgba(180,140,60,0.3),rgba(180,140,60,0.15))",border:"1px solid "+G.goldB,color:G.gold,padding:"12px",borderRadius:8,cursor:"pointer",fontSize:14,fontFamily:"Cinzel,serif",letterSpacing:"0.1em",marginBottom:12}}>
           {loading ? "Creating account..." : "Create Account"}
         </button>
-        <div style={{textAlign:"center",fontSize:13,color:G.muted}}>
+        <div style={{textAlign:"center",fontSize:13,color:G.muted,marginTop:4}}>
           Already have an account?{" "}
           <span onClick={()=>{setScreen("login");setError("");}} style={{color:G.gold,cursor:"pointer"}}>Sign in</span>
+          {" · "}
+          <span onClick={()=>window.open("https://eloraradiance.com/anchored-steps-app","_blank")} style={{color:G.muted,cursor:"pointer",textDecoration:"underline"}}>View Plans</span>
         </div>
       </div>
     </div>
@@ -245,6 +264,63 @@ export default function AnchoredSteps() {
   const CROSS_REFS = window.__APPDATA__.CROSS_REFS;
   const EXCERPTS = window.__APPDATA__.EXCERPTS;
   const AUTHOR_DATA = window.__APPDATA__.AUTHOR_DATA;
+
+  // ── Push notification setup
+  useEffect(() => {
+    if (!("serviceWorker" in navigator) || !("Notification" in window)) return;
+
+    // Register service worker
+    navigator.serviceWorker.register("/sw.js").then(reg => {
+      console.log("SW registered");
+
+      // Ask for permission after user is logged in
+      if (Notification.permission === "default") {
+        setTimeout(() => {
+          Notification.requestPermission().then(perm => {
+            if (perm === "granted") {
+              // Schedule daily reminder check
+              scheduleDailyReminder(reg);
+            }
+          });
+        }, 5000); // Ask after 5 seconds so it's not immediate
+      } else if (Notification.permission === "granted") {
+        scheduleDailyReminder(reg);
+      }
+    }).catch(err => console.log("SW error:", err));
+
+    function scheduleDailyReminder(reg) {
+      // Store last notification time
+      const lastNotif = localStorage.getItem("last_notif");
+      const now = new Date();
+      const today = now.toISOString().split("T")[0];
+
+      if (lastNotif === today) return; // Already notified today
+
+      // Check if it's morning time (7-9am) or evening (7-9pm)
+      const hour = now.getHours();
+      const isGoodTime = (hour >= 7 && hour <= 9) || (hour >= 19 && hour <= 21);
+
+      if (isGoodTime) {
+        const messages = [
+          "Your journal is waiting. A few minutes with God changes everything.",
+          "Walk steadily today. Your anchor holds.",
+          "Ready for your time with God? Week " + (parseInt(localStorage.getItem("anchored_week") || "1")) + " is waiting.",
+          "Stay anchored. Open your journal today.",
+          "Faith grows through intention. Your journal is ready.",
+        ];
+        const msg = messages[Math.floor(Math.random() * messages.length)];
+
+        reg.showNotification("Anchored Steps ⚓", {
+          body: msg,
+          icon: "/icon.png",
+          badge: "/icon.png",
+          tag: "anchored-daily",
+        });
+
+        localStorage.setItem("last_notif", today);
+      }
+    }
+  }, []);
 
   // ── Auth listener
   useEffect(() => {
@@ -410,15 +486,15 @@ export default function AnchoredSteps() {
   if (!session) return <AuthScreen onAuth={() => window.location.reload()} />;
 
   const week = ALL_WEEKS.find(w => w.week === wk);
-  const INP = {width:"100%",background:"rgba(255,255,255,0.028)",border:"1px solid "+G.border,borderRadius:10,color:G.text,fontSize:16,lineHeight:1.8,padding:"14px 16px",fontFamily:"EB Garamond,Georgia,serif",outline:"none"};
-  const LBL = {fontSize:10,color:G.gold,letterSpacing:"0.15em",textTransform:"uppercase",marginBottom:8,display:"block",fontFamily:"Cinzel,serif"};
+  const INP = {width:"100%",background:"rgba(255,255,255,0.035)",border:"1px solid rgba(176,138,78,0.18)",borderRadius:12,color:G.text,fontSize:17,lineHeight:1.9,padding:"16px 18px",fontFamily:"EB Garamond,Georgia,serif",outline:"none",boxShadow:"inset 0 1px 0 rgba(255,255,255,0.02)"};
+  const LBL = {fontSize:10,color:G.gold,letterSpacing:"0.14em",textTransform:"uppercase",marginBottom:12,display:"block",fontFamily:"Cinzel,serif"};
   const kwList = week ? week.keywords.split(",").map(k => k.trim()) : [];
   const crossRefs = CROSS_REFS[wk] || [];
 
   return (
-    <div style={{minHeight:"100vh",background:"linear-gradient(155deg,"+G.bg+" 0%,"+G.bgMid+" 55%,"+G.bg+" 100%)"}}>
+    <div style={{minHeight:"100vh",background:"linear-gradient(155deg,#0F1A24 0%,#1A2A38 50%,#0F1A24 100%)"}}>
 
-      <header style={{position:"sticky",top:0,zIndex:100,background:"rgba(11,24,37,0.95)",backdropFilter:"blur(20px)",borderBottom:"1px solid "+G.goldB}}>
+      <header style={{position:"sticky",top:0,zIndex:100,background:"rgba(15,26,36,0.88)",backdropFilter:"blur(14px)",borderBottom:"1px solid rgba(176,138,78,0.14)"}}>
         <div style={{borderBottom:"1px solid rgba(180,140,60,0.12)",padding:"10px 18px"}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
             <div style={{display:"flex",alignItems:"center",gap:8}}>
@@ -454,12 +530,12 @@ export default function AnchoredSteps() {
             </div>
 
             <div style={{background:"rgba(255,255,255,0.05)",borderRadius:3,height:3,marginBottom:20,overflow:"hidden"}}>
-              <div style={{height:"100%",background:"linear-gradient(90deg,"+G.gold+","+G.goldL+")",width:((wk/52)*100)+"%",transition:"width .5s ease"}} />
+              <div style={{height:"100%",background:"linear-gradient(90deg,#B08A4E,#D6B97A)",width:((wk/52)*100)+"%",transition:"width .5s ease"}} />
             </div>
 
             <div style={{display:"flex",gap:3,marginBottom:20,flexWrap:"wrap"}}>
               {SECTIONS.map(s => (
-                <button key={s.id} onClick={() => { setSec(s.id); setAnimK(a=>a+1); setLexWord(null); setQuizMode(false); }} style={{background:sec===s.id?G.goldF:"transparent",border:"1px solid "+(sec===s.id?G.goldB:G.border),color:sec===s.id?G.gold:G.muted,padding:"5px 9px",borderRadius:6,cursor:"pointer",fontSize:11,transition:"all .18s"}}>{s.label}</button>
+                <button key={s.id} onClick={() => { setSec(s.id); setAnimK(a=>a+1); setLexWord(null); setQuizMode(false); }} style={{background:sec===s.id?"linear-gradient(135deg,rgba(176,138,78,0.15),rgba(176,138,78,0.06))":"transparent",border:"1px solid "+(sec===s.id?"rgba(176,138,78,0.35)":G.border),color:sec===s.id?G.gold:G.muted,padding:"6px 10px",borderRadius:8,cursor:"pointer",fontSize:11,transition:"all .18s"}}>{s.label}</button>
               ))}
             </div>
 
@@ -473,11 +549,11 @@ export default function AnchoredSteps() {
                     const ae = (AUTHOR_DATA[wk]||[])[i];
                     const isOpen = openAuthor === ak;
                     return (
-                      <div key={i} style={{background:i===0?"linear-gradient(135deg,rgba(180,140,60,0.11),rgba(180,140,60,0.04))":G.bgCard,border:"1px solid "+(i===0?G.goldB:G.border),borderRadius:13,padding:"18px 20px",marginBottom:10}}>
+                      <div key={i} style={{background:i===0?"linear-gradient(145deg,rgba(176,138,78,0.13),rgba(176,138,78,0.04))":G.bgCard,border:"1px solid "+(i===0?G.goldB:G.border),borderRadius:13,padding:"18px 20px",marginBottom:10}}>
                         <div style={{display:"flex",gap:10}}>
                           <span style={{color:G.gold,fontSize:24,lineHeight:1,opacity:.4,flexShrink:0,marginTop:3}}>&#8220;</span>
                           <div style={{flex:1}}>
-                            <p style={{fontSize:17,lineHeight:1.75,color:G.cream,fontStyle:"italic",marginBottom:8}}>{s.text}</p>
+                            <p style={{fontSize:19,lineHeight:1.95,color:G.cream,fontStyle:"italic",marginBottom:12,letterSpacing:"0.01em"}}>{s.text}</p>
                             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8,marginBottom:ae?8:0}}>
                               <span style={{fontSize:12,color:G.gold,fontFamily:"Cinzel,serif",fontWeight:500}}>{s.ref}</span>
                               <div style={{display:"flex",gap:6}}>
@@ -591,7 +667,7 @@ export default function AnchoredSteps() {
               {sec === "study" && (
                 <div>
                   <label style={LBL}>Study Notes</label>
-                  <div style={{background:G.bgCard,border:"1px solid "+G.border,borderRadius:12,padding:"20px",marginBottom:18,fontSize:16,lineHeight:1.85,whiteSpace:"pre-line",color:G.text}}>{week.studyNotes}</div>
+                  <div style={{background:"linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))",border:"1px solid rgba(176,138,78,0.16)",borderRadius:14,padding:"22px 24px",marginBottom:20,fontSize:17,lineHeight:1.9,whiteSpace:"pre-line",color:G.text,boxShadow:"0 8px 24px rgba(0,0,0,0.1)"}}>{week.studyNotes}</div>
                   <label style={LBL}>Your Notes &amp; Insights</label>
                   <textarea rows={7} value={get("study")} onChange={e => set("study",e.target.value)} placeholder="What stands out? What questions arise?" style={INP} />
                   <SaveBtn onSave={save} flash={flash} />
@@ -603,7 +679,7 @@ export default function AnchoredSteps() {
                   <label style={LBL}>Self Reflection</label>
                   {week.reflectionPrompts.map((pr,i) => (
                     <div key={i} style={{marginBottom:18}}>
-                      <div style={{background:G.goldF,border:"1px solid "+G.goldB,borderRadius:9,padding:"10px 14px",marginBottom:8}}>
+                      <div style={{background:"linear-gradient(145deg,rgba(176,138,78,0.1),rgba(176,138,78,0.04))",border:"1px solid rgba(176,138,78,0.22)",borderRadius:12,padding:"14px 16px",marginBottom:10}}>
                         <span style={{fontSize:12,color:G.gold}}>{i+1}. </span>
                         <span style={{fontSize:15,color:G.cream,fontStyle:"italic"}}>{pr}</span>
                       </div>
@@ -640,7 +716,7 @@ export default function AnchoredSteps() {
               {sec === "prayer" && (
                 <div>
                   <label style={LBL}>Prayer</label>
-                  <div style={{background:G.purpleF,border:"1px solid "+G.purpleB,borderRadius:12,padding:"18px 20px",marginBottom:20}}>
+                  <div style={{background:"linear-gradient(145deg,rgba(168,154,207,0.09),rgba(168,154,207,0.04))",border:"1px solid rgba(168,154,207,0.22)",borderRadius:14,padding:"22px 24px",marginBottom:22}}>
                     <div style={{fontSize:10,color:G.purple,letterSpacing:"0.12em",textTransform:"uppercase",marginBottom:9,fontFamily:"Cinzel,serif"}}>🙏 Prayer Prompt</div>
                     <p style={{fontSize:16,color:G.cream,lineHeight:1.8,fontStyle:"italic"}}>{week.prayerPrompt}</p>
                   </div>
@@ -761,7 +837,7 @@ export default function AnchoredSteps() {
                 <span style={{fontSize:11,color:G.muted}}>{Math.round((wk/52)*100)}%</span>
               </div>
               <div style={{background:"rgba(255,255,255,0.06)",borderRadius:5,height:7,overflow:"hidden"}}>
-                <div style={{height:"100%",background:"linear-gradient(90deg,"+G.gold+","+G.goldL+")",width:((wk/52)*100)+"%",transition:"width .6s ease"}} />
+                <div style={{height:"100%",background:"linear-gradient(90deg,#B08A4E,#D6B97A)",width:((wk/52)*100)+"%",transition:"width .6s ease"}} />
               </div>
             </div>
             <div style={{background:G.bgCard,border:"1px solid "+G.border,borderRadius:12,padding:"16px"}}>
