@@ -175,9 +175,9 @@ function AuthScreen({onAuth}) {
       <div style={{fontSize:13,color:G.muted,fontStyle:"italic",marginBottom:28,textAlign:"center"}}>Subscribe to receive your access code instantly by email.</div>
       <div style={{width:"100%",maxWidth:400}}>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:20}}>
-          <a href="https://buy.stripe.com/9B6fZg8bqalMe117fJ57W03" target="_blank" rel="noreferrer" style={{textDecoration:"none",display:"block",background:"linear-gradient(145deg,rgba(176,138,78,0.1),rgba(176,138,78,0.04))",border:"1px solid rgba(176,138,78,0.28)",borderRadius:14,padding:"24px 16px",textAlign:"center"}}>
+          <a href="https://buy.stripe.com/28E4gyfDSfG69KLgQj57W04" target="_blank" rel="noreferrer" style={{textDecoration:"none",display:"block",background:"linear-gradient(145deg,rgba(176,138,78,0.1),rgba(176,138,78,0.04))",border:"1px solid rgba(176,138,78,0.28)",borderRadius:14,padding:"24px 16px",textAlign:"center"}}>
             <div style={{fontFamily:"Cinzel,serif",fontSize:12,color:G.gold,letterSpacing:"0.1em",marginBottom:10}}>Monthly</div>
-            <div style={{fontSize:32,fontWeight:600,color:G.cream,fontFamily:"Cinzel,serif",marginBottom:4}}>$1.50</div>
+            <div style={{fontSize:32,fontWeight:600,color:G.cream,fontFamily:"Cinzel,serif",marginBottom:4}}>$5.50</div>
             <div style={{fontSize:12,color:G.muted,marginBottom:16}}>per month</div>
             <div style={{background:"rgba(176,138,78,0.2)",border:"1px solid rgba(176,138,78,0.3)",borderRadius:8,padding:"10px",fontSize:13,color:G.gold,fontFamily:"EB Garamond,Georgia,serif"}}>Subscribe &#8594;</div>
           </a>
@@ -549,13 +549,13 @@ export default function AnchoredSteps() {
                     const ae = (AUTHOR_DATA[wk]||[])[i];
                     const isOpen = openAuthor === ak;
                     return (
-                      <div key={i} style={{background:i===0?"linear-gradient(145deg,rgba(176,138,78,0.13),rgba(176,138,78,0.04))":G.bgCard,border:"1px solid "+(i===0?G.goldB:G.border),borderRadius:13,padding:"18px 20px",marginBottom:10}}>
+                      <div key={i} style={{background:i===0?"linear-gradient(145deg,rgba(176,138,78,0.13),rgba(176,138,78,0.04))":G.bgCard,border:"1px solid "+(i===0?"rgba(176,138,78,0.4)":G.border),borderRadius:16,padding:"22px 24px",marginBottom:14,boxShadow:i===0?"0 8px 32px rgba(0,0,0,0.15)":"none"}}>
                         <div style={{display:"flex",gap:10}}>
-                          <span style={{color:G.gold,fontSize:24,lineHeight:1,opacity:.4,flexShrink:0,marginTop:3}}>&#8220;</span>
+                          <span style={{color:G.gold,fontSize:32,lineHeight:1,opacity:.3,flexShrink:0,marginTop:0,fontFamily:"Georgia,serif"}}>&#8220;</span>
                           <div style={{flex:1}}>
                             <p style={{fontSize:19,lineHeight:1.95,color:G.cream,fontStyle:"italic",marginBottom:12,letterSpacing:"0.01em"}}>{s.text}</p>
                             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8,marginBottom:ae?8:0}}>
-                              <span style={{fontSize:12,color:G.gold,fontFamily:"Cinzel,serif",fontWeight:500}}>{s.ref}</span>
+                              <span style={{fontSize:11,color:G.gold,fontFamily:"Cinzel,serif",fontWeight:500,letterSpacing:"0.08em",textTransform:"uppercase"}}>{s.ref}</span>
                               <div style={{display:"flex",gap:6}}>
                                 {ae && <button onClick={() => setOpenAuthor(isOpen?null:ak)} style={{background:isOpen?"rgba(180,140,60,0.15)":G.goldF,border:"1px solid "+G.goldB,color:G.gold,padding:"2px 10px",borderRadius:12,cursor:"pointer",fontSize:11,fontFamily:"Cinzel,serif"}}>{isOpen?"▲ Hide":"▼ Context"}</button>}
                                 <button onClick={() => startQuiz(s)} style={{background:entries.find(e=>e.field_key==="mem_"+s.ref)?"rgba(120,184,120,0.15)":G.purpleF,border:"1px solid "+(entries.find(e=>e.field_key==="mem_"+s.ref)?G.greenB:G.purpleB),color:entries.find(e=>e.field_key==="mem_"+s.ref)?G.green:G.purple,padding:"2px 10px",borderRadius:12,cursor:"pointer",fontSize:11,fontFamily:"Cinzel,serif"}}>
@@ -564,7 +564,7 @@ export default function AnchoredSteps() {
                               </div>
                             </div>
                             {isOpen && ae && (
-                              <div className="sd" style={{background:"rgba(180,140,60,0.05)",border:"1px solid rgba(180,140,60,0.15)",borderRadius:8,padding:"12px 14px",marginTop:4}}>
+                              <div className="sd" style={{background:"linear-gradient(145deg,rgba(176,138,78,0.07),rgba(176,138,78,0.02))",border:"1px solid rgba(176,138,78,0.18)",borderRadius:12,padding:"16px 18px",marginTop:8}}>
                                 {[["Author",ae.author],["Location",ae.location],["Audience",ae.audience],["Commentary",ae.commentary]].map(([lb,val]) => (
                                   <div key={lb} style={{marginBottom:8}}>
                                     <span style={{fontSize:10,color:G.gold,fontFamily:"Cinzel,serif",letterSpacing:"0.1em",textTransform:"uppercase"}}>{lb}</span>
@@ -579,7 +579,7 @@ export default function AnchoredSteps() {
                     );
                   })}
                   {EXCERPTS[wk] && (
-                    <div style={{background:"linear-gradient(135deg,rgba(180,140,60,0.07),rgba(180,140,60,0.02))",border:"1px solid rgba(180,140,60,0.18)",borderRadius:10,padding:"16px 18px",marginBottom:10}}>
+                    <div style={{background:"linear-gradient(145deg,rgba(176,138,78,0.09),rgba(176,138,78,0.02))",border:"1px solid rgba(176,138,78,0.2)",borderRadius:14,padding:"20px 22px",marginBottom:14}}>
                       <div style={{fontSize:10,color:G.gold,letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:8,fontFamily:"Cinzel,serif"}}>From the Journal</div>
                       <p style={{fontSize:16,color:G.text,lineHeight:1.8,fontStyle:"italic"}}>{EXCERPTS[wk]}</p>
                     </div>
@@ -616,14 +616,14 @@ export default function AnchoredSteps() {
                         const entry = LEXICON[kw];
                         const active = lexWord === kw;
                         return (
-                          <button key={kw} onClick={() => setLexWord(active?null:kw)} style={{background:active?G.goldF:"rgba(255,255,255,0.04)",border:"1px solid "+(active?G.goldB:G.border),color:active?G.gold:G.text,padding:"5px 14px",borderRadius:20,cursor:entry?"pointer":"default",fontSize:14,fontFamily:"EB Garamond,Georgia,serif",fontStyle:"italic",transition:"all .2s"}}>
+                          <button key={kw} onClick={() => setLexWord(active?null:kw)} style={{background:active?G.goldF:"rgba(255,255,255,0.04)",border:"1px solid "+(active?G.goldB:G.border),color:active?G.gold:G.text,padding:"7px 16px",borderRadius:20,cursor:entry?"pointer":"default",fontSize:15,fontFamily:"EB Garamond,Georgia,serif",fontStyle:"italic",transition:"all .25s",letterSpacing:"0.01em"}}>
                             {kw}{entry ? " ✦" : ""}
                           </button>
                         );
                       })}
                     </div>
                     {lexWord && LEXICON[lexWord] && (
-                      <div className="sd" style={{marginTop:12,background:"linear-gradient(135deg,rgba(158,136,196,0.1),rgba(158,136,196,0.04))",border:"1px solid "+G.purpleB,borderRadius:10,padding:"14px 16px"}}>
+                      <div className="sd" style={{marginTop:12,background:"linear-gradient(145deg,rgba(168,154,207,0.1),rgba(168,154,207,0.03))",border:"1px solid rgba(168,154,207,0.25)",borderRadius:14,padding:"18px 20px",boxShadow:"0 8px 24px rgba(0,0,0,0.12)"}}>
                         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
                           <span style={{fontFamily:"Cinzel,serif",fontSize:10,color:G.purple,letterSpacing:"0.12em",textTransform:"uppercase"}}>{LEXICON[lexWord].lang} &#183; {LEXICON[lexWord].strongs}</span>
                           <button onClick={() => setLexWord(null)} style={{background:"transparent",border:"none",color:G.dim,cursor:"pointer",fontSize:15}}>&#215;</button>
@@ -657,7 +657,7 @@ export default function AnchoredSteps() {
                   )}
                   <div style={{marginBottom:18}}>
                     <label style={LBL}>Personal Reflection</label>
-                    <p style={{fontSize:12,color:G.dim,fontStyle:"italic",marginBottom:7}}>What does this week&#8217;s Scripture mean to you personally?</p>
+                    <p style={{fontSize:14,color:G.muted,fontStyle:"italic",marginBottom:10,lineHeight:1.7}}>What is God showing you through this passage? Write what stands out, convicts, or encourages you.</p>
                     <textarea rows={6} value={get("vm_pr")} onChange={e => set("vm_pr",e.target.value)} placeholder="Write your reflection here..." style={INP} />
                   </div>
                   <SaveBtn onSave={save} flash={flash} />
@@ -669,7 +669,8 @@ export default function AnchoredSteps() {
                   <label style={LBL}>Study Notes</label>
                   <div style={{background:"linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))",border:"1px solid rgba(176,138,78,0.16)",borderRadius:14,padding:"22px 24px",marginBottom:20,fontSize:17,lineHeight:1.9,whiteSpace:"pre-line",color:G.text,boxShadow:"0 8px 24px rgba(0,0,0,0.1)"}}>{week.studyNotes}</div>
                   <label style={LBL}>Your Notes &amp; Insights</label>
-                  <textarea rows={7} value={get("study")} onChange={e => set("study",e.target.value)} placeholder="What stands out? What questions arise?" style={INP} />
+                  <p style={{fontSize:14,color:G.muted,fontStyle:"italic",marginBottom:10,lineHeight:1.6}}>Capture what stands out, what convicts you, or what you want to carry with you this week.</p>
+                  <textarea rows={7} value={get("study")} onChange={e => set("study",e.target.value)} placeholder="What is God highlighting for you in these notes?" style={INP} />
                   <SaveBtn onSave={save} flash={flash} />
                 </div>
               )}
@@ -680,14 +681,15 @@ export default function AnchoredSteps() {
                   {week.reflectionPrompts.map((pr,i) => (
                     <div key={i} style={{marginBottom:18}}>
                       <div style={{background:"linear-gradient(145deg,rgba(176,138,78,0.1),rgba(176,138,78,0.04))",border:"1px solid rgba(176,138,78,0.22)",borderRadius:12,padding:"14px 16px",marginBottom:10}}>
-                        <span style={{fontSize:12,color:G.gold}}>{i+1}. </span>
-                        <span style={{fontSize:15,color:G.cream,fontStyle:"italic"}}>{pr}</span>
+                        <span style={{fontSize:11,color:G.gold,fontFamily:"Cinzel,serif",letterSpacing:"0.1em",marginRight:8}}>0{i+1}</span>
+                        <span style={{fontSize:16,color:G.cream,fontStyle:"italic",lineHeight:1.7}}>{pr}</span>
                       </div>
                       <textarea rows={4} value={get("rf"+i)} onChange={e => set("rf"+i,e.target.value)} placeholder="Your honest response..." style={INP} />
                     </div>
                   ))}
-                  <label style={{...LBL,marginTop:8}}>Journal Notes</label>
-                  <textarea rows={6} value={get("rfj")} onChange={e => set("rfj",e.target.value)} placeholder="Additional thoughts..." style={INP} />
+                  <label style={{...LBL,marginTop:12}}>Journal Notes</label>
+                  <p style={{fontSize:14,color:G.muted,fontStyle:"italic",marginBottom:10,lineHeight:1.6}}>Any additional thoughts, feelings, or prayers stirred by this week&#8217;s reflection.</p>
+                  <textarea rows={6} value={get("rfj")} onChange={e => set("rfj",e.target.value)} placeholder="Write freely here..." style={INP} />
                   <SaveBtn onSave={save} flash={flash} />
                 </div>
               )}
@@ -703,12 +705,13 @@ export default function AnchoredSteps() {
                       </div>
                     ))}
                   </div>
-                  <div style={{background:G.bgCard,border:"1px solid "+G.border,borderRadius:10,padding:"13px 16px",marginBottom:18,textAlign:"center"}}>
+                  <div style={{background:"linear-gradient(145deg,rgba(176,138,78,0.08),rgba(176,138,78,0.03))",border:"1px solid rgba(176,138,78,0.2)",borderRadius:14,padding:"22px 24px",marginBottom:20,textAlign:"center"}}>
                     <div style={{fontSize:10,color:G.muted,letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:6,fontFamily:"Cinzel,serif"}}>Daily Confession</div>
-                    <div style={{fontSize:16,color:G.cream,fontStyle:"italic",lineHeight:1.6}}>&#8220;{week.dailyConfession}&#8221;</div>
+                    <div style={{fontSize:19,color:G.cream,fontStyle:"italic",lineHeight:1.8,fontFamily:"EB Garamond,Georgia,serif",letterSpacing:"0.01em"}}>&#8220;{week.dailyConfession}&#8221;</div>
                   </div>
                   <label style={LBL}>How Will You Live This Out?</label>
-                  <textarea rows={5} value={get("apply")} onChange={e => set("apply",e.target.value)} placeholder="Your specific plan..." style={INP} />
+                  <p style={{fontSize:14,color:G.muted,fontStyle:"italic",marginBottom:10,lineHeight:1.6}}>Faith is meant to be walked out. What is one specific way you will live this out this week?</p>
+                  <textarea rows={5} value={get("apply")} onChange={e => set("apply",e.target.value)} placeholder="Write your specific plan here..." style={INP} />
                   <SaveBtn onSave={save} flash={flash} />
                 </div>
               )}
@@ -718,10 +721,11 @@ export default function AnchoredSteps() {
                   <label style={LBL}>Prayer</label>
                   <div style={{background:"linear-gradient(145deg,rgba(168,154,207,0.09),rgba(168,154,207,0.04))",border:"1px solid rgba(168,154,207,0.22)",borderRadius:14,padding:"22px 24px",marginBottom:22}}>
                     <div style={{fontSize:10,color:G.purple,letterSpacing:"0.12em",textTransform:"uppercase",marginBottom:9,fontFamily:"Cinzel,serif"}}>🙏 Prayer Prompt</div>
-                    <p style={{fontSize:16,color:G.cream,lineHeight:1.8,fontStyle:"italic"}}>{week.prayerPrompt}</p>
+                    <p style={{fontSize:18,color:G.cream,lineHeight:1.9,fontStyle:"italic",letterSpacing:"0.01em"}}>{week.prayerPrompt}</p>
                   </div>
                   <label style={LBL}>Write Your Own Prayer</label>
-                  <textarea rows={10} value={get("prayer")} onChange={e => set("prayer",e.target.value)} placeholder="Write your personal prayer..." style={{...INP,minHeight:180}} />
+                  <p style={{fontSize:14,color:G.muted,fontStyle:"italic",marginBottom:10,lineHeight:1.6}}>Write honestly. Bring your heart before God.</p>
+                  <textarea rows={10} value={get("prayer")} onChange={e => set("prayer",e.target.value)} placeholder="Speak freely to Him here..." style={{...INP,minHeight:200,lineHeight:2}} />
                   <SaveBtn onSave={save} flash={flash} />
                 </div>
               )}
@@ -729,14 +733,14 @@ export default function AnchoredSteps() {
               {sec === "tracker" && (
                 <div>
                   <label style={LBL}>Gratitude + Growth Tracker</label>
-                  <p style={{fontSize:13,color:G.muted,fontStyle:"italic",marginBottom:16}}>{week.trackerLabel}</p>
+                  <p style={{fontSize:15,color:G.muted,fontStyle:"italic",marginBottom:20,lineHeight:1.7}}>{week.trackerLabel}</p>
                   {DAYS.map((d,i) => (
                     <div key={i} style={{marginBottom:12}}>
                       <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:6}}>
                         <button onClick={() => setDay(day===i?-1:i)} style={{background:day===i?G.goldF:"transparent",border:"1px solid "+(day===i?G.goldB:G.border),color:day===i?G.gold:G.muted,padding:"4px 13px",borderRadius:6,cursor:"pointer",fontSize:13,fontFamily:"Cinzel,serif",transition:"all .15s"}}>{d}</button>
                         {(get("tr_"+i)||"").trim() && <span style={{width:7,height:7,borderRadius:"50%",background:G.green,display:"inline-block"}} />}
                       </div>
-                      {day === i && <textarea className="fu" rows={3} value={get("tr_"+i)} onChange={e => set("tr_"+i,e.target.value)} placeholder={d+": How did you experience gratitude or growth today?"} style={INP} />}
+                      {day === i && <textarea className="fu" rows={3} value={get("tr_"+i)} onChange={e => set("tr_"+i,e.target.value)} placeholder={d+": How did you experience gratitude, growth, or God's presence today?"} style={INP} />}
                     </div>
                   ))}
                   <SaveBtn onSave={save} flash={flash} />
@@ -755,12 +759,12 @@ export default function AnchoredSteps() {
                     </div>
                   ))}
                   {wk < 52 && (
-                    <button onClick={() => goWk(wk+1)} style={{marginTop:12,width:"100%",background:"linear-gradient(135deg,rgba(180,140,60,0.18),rgba(180,140,60,0.07))",border:"1px solid "+G.goldB,color:G.gold,padding:"12px",borderRadius:10,cursor:"pointer",fontSize:14,fontFamily:"Cinzel,serif",letterSpacing:"0.07em"}}>
+                    <button onClick={() => goWk(wk+1)} style={{marginTop:16,width:"100%",background:"linear-gradient(135deg,rgba(176,138,78,0.22),rgba(176,138,78,0.08))",border:"1px solid rgba(176,138,78,0.35)",color:G.gold,padding:"16px",borderRadius:12,cursor:"pointer",fontSize:15,fontFamily:"Cinzel,serif",letterSpacing:"0.07em",boxShadow:"0 4px 16px rgba(0,0,0,0.1)"}}>
                       Begin Week {wk+1}: {ALL_WEEKS.find(w => w.week===wk+1)?.title} &#8594;
                     </button>
                   )}
                   {wk === 52 && (
-                    <div style={{textAlign:"center",padding:"22px",background:G.goldF,border:"1px solid "+G.goldB,borderRadius:12,marginTop:12}}>
+                    <div style={{textAlign:"center",padding:"32px 24px",background:"linear-gradient(145deg,rgba(176,138,78,0.14),rgba(176,138,78,0.05))",border:"1px solid rgba(176,138,78,0.3)",borderRadius:16,marginTop:16,boxShadow:"0 8px 32px rgba(0,0,0,0.15)"}}>
                       <div style={{fontSize:22,marginBottom:7}}>⚓</div>
                       <div style={{fontFamily:"Cinzel,serif",fontSize:16,color:G.cream,marginBottom:5}}>You Have Finished Well</div>
                       <div style={{fontSize:13,color:G.muted,fontStyle:"italic"}}>Walk steadily. Stay anchored. Trust God with every step.</div>
@@ -773,7 +777,7 @@ export default function AnchoredSteps() {
               {sec === "community" && (
                 <div>
                   <label style={LBL}>Community Reflections &#8212; Week {wk}</label>
-                  <p style={{fontSize:13,color:G.muted,fontStyle:"italic",marginBottom:18,lineHeight:1.6}}>Share one reflection from this week with the Anchored Steps community.</p>
+                  <p style={{fontSize:15,color:G.muted,fontStyle:"italic",marginBottom:20,lineHeight:1.75}}>Share one insight, takeaway, or truth God highlighted for you this week.</p>
                   <textarea rows={4} value={communityInput} onChange={e => setCommunityInput(e.target.value)} placeholder="Share what God revealed to you this week..." style={{...INP,marginBottom:10}} />
                   <button onClick={submitCommunity} style={{background:communityDone?"rgba(120,184,120,0.15)":G.goldF,border:"1px solid "+(communityDone?G.greenB:G.goldB),color:communityDone?G.green:G.gold,padding:"9px 18px",borderRadius:8,cursor:"pointer",fontSize:12,fontFamily:"Cinzel,serif",letterSpacing:"0.08em",marginBottom:24,transition:"all .3s"}}>
                     {communityDone ? "✓ Shared!" : "Share with Community"}
@@ -804,7 +808,7 @@ export default function AnchoredSteps() {
                 const done = daysComplete(w.week);
                 const cur = w.week === wk;
                 return (
-                  <button key={w.week} onClick={() => { goWk(w.week); setView("journal"); }} style={{background:cur?"linear-gradient(135deg,rgba(180,140,60,0.14),rgba(180,140,60,0.05))":done>0?G.greenF:G.bgCard,border:"1px solid "+(cur?G.goldB:done>0?G.greenB:G.border),borderRadius:10,padding:"10px 12px",cursor:"pointer",textAlign:"left",transition:"all .2s"}}>
+                  <button key={w.week} onClick={() => { goWk(w.week); setView("journal"); }} style={{background:cur?"linear-gradient(145deg,rgba(176,138,78,0.16),rgba(176,138,78,0.06))":done>0?"linear-gradient(145deg,rgba(124,146,132,0.1),rgba(124,146,132,0.03))":G.bgCard,border:"1px solid "+(cur?"rgba(176,138,78,0.4)":done>0?"rgba(124,146,132,0.3)":G.border),borderRadius:12,padding:"12px 14px",cursor:"pointer",textAlign:"left",transition:"all .25s",boxShadow:cur?"0 4px 16px rgba(0,0,0,0.1)":"none"}}>
                     <div style={{display:"flex",justifyContent:"space-between",marginBottom:2}}>
                       <span style={{fontSize:9,color:cur?G.gold:"rgba(140,160,175,0.6)",fontFamily:"Cinzel,serif",letterSpacing:"0.1em"}}>WEEK {w.week}</span>
                       {done > 0 && <span style={{fontSize:9,color:G.green}}>{done}/7</span>}
@@ -824,9 +828,9 @@ export default function AnchoredSteps() {
             <p style={{fontSize:13,color:G.muted,fontStyle:"italic",marginBottom:22}}>Walk steadily. Stay anchored. Trust God with every step.</p>
             <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:8,marginBottom:20}}>
               {[[weeksActive,"Weeks Active","📖"],[wk,"Current Week","⚓"],[52-wk,"Weeks Ahead","🗺️"],[streak,"Day Streak","🔥"]].map(([val,lbl,icon],i) => (
-                <div key={i} style={{background:G.bgCard,border:"1px solid "+(i===3&&streak>0?G.goldB:G.border),borderRadius:12,padding:"14px",textAlign:"center"}}>
+                <div key={i} style={{background:"linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01))",border:"1px solid "+(i===3&&streak>0?"rgba(176,138,78,0.35)":G.border),borderRadius:14,padding:"18px 14px",textAlign:"center",boxShadow:"0 4px 16px rgba(0,0,0,0.08)"}}>
                   <div style={{fontSize:20,marginBottom:4}}>{icon}</div>
-                  <div style={{fontSize:22,fontWeight:600,color:"rgba(200,185,155,0.75)",fontFamily:"Cinzel,serif"}}>{val}</div>
+                  <div style={{fontSize:24,fontWeight:600,color:G.cream,fontFamily:"Cinzel,serif",marginBottom:2}}>{val}</div>
                   <div style={{fontSize:9,color:G.muted,letterSpacing:"0.07em",marginTop:2}}>{lbl}</div>
                 </div>
               ))}
@@ -841,7 +845,7 @@ export default function AnchoredSteps() {
               </div>
             </div>
             <div style={{background:G.bgCard,border:"1px solid "+G.border,borderRadius:12,padding:"16px"}}>
-              <div style={{fontSize:10,color:G.gold,fontFamily:"Cinzel,serif",letterSpacing:"0.12em",marginBottom:10}}>52-WEEK MAP</div>
+              <div style={{fontSize:10,color:G.gold,fontFamily:"Cinzel,serif",letterSpacing:"0.14em",marginBottom:14}}>YOUR JOURNEY MAP</div>
               <div style={{display:"flex",flexWrap:"wrap",gap:4}}>
                 {ALL_WEEKS.map(w => {
                   const done = daysComplete(w.week);
@@ -849,7 +853,7 @@ export default function AnchoredSteps() {
                   const pct = done/7;
                   const bg = cur?G.gold:pct===1?G.green:pct>0?"rgba(120,184,120,"+(0.25+pct*0.55)+")":"rgba(255,255,255,0.045)";
                   return (
-                    <button key={w.week} onClick={() => { goWk(w.week); setView("journal"); }} title={"Week "+w.week+": "+w.title} style={{width:25,height:25,borderRadius:5,background:bg,border:"1px solid "+(cur?G.gold:"transparent"),cursor:"pointer",fontSize:9,color:pct>0||cur?"#fff":G.dim,transition:"all .15s",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                    <button key={w.week} onClick={() => { goWk(w.week); setView("journal"); }} title={"Week "+w.week+": "+w.title} style={{width:26,height:26,borderRadius:6,background:bg,border:"1px solid "+(cur?"rgba(176,138,78,0.8)":"transparent"),cursor:"pointer",fontSize:9,color:pct>0||cur?"#fff":G.dim,transition:"all .2s",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:cur?"0 0 8px rgba(176,138,78,0.4)":"none"}}>
                       {w.week}
                     </button>
                   );
@@ -863,11 +867,11 @@ export default function AnchoredSteps() {
           <div className="fi">
             <h2 style={{fontFamily:"Cinzel,serif",fontSize:20,color:G.cream,marginBottom:8}}>Export Your Journal</h2>
             <p style={{fontSize:13,color:G.muted,fontStyle:"italic",lineHeight:1.6,marginBottom:22}}>Download everything you have written this year.</p>
-            <div style={{background:G.bgCard,border:"1px solid "+G.border,borderRadius:12,padding:"24px",textAlign:"center"}}>
+            <div style={{background:"linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01))",border:"1px solid rgba(176,138,78,0.18)",borderRadius:16,padding:"32px",textAlign:"center",boxShadow:"0 8px 24px rgba(0,0,0,0.1)"}}>
               <div style={{fontSize:32,marginBottom:12}}>📄</div>
               <div style={{fontFamily:"Cinzel,serif",fontSize:15,color:G.cream,marginBottom:8}}>Your Complete Faith Journal</div>
               <p style={{fontSize:13,color:G.muted,lineHeight:1.7,marginBottom:20}}>All study notes, reflections, prayers, and tracker entries.</p>
-              <button onClick={exportNotes} style={{background:"linear-gradient(135deg,rgba(180,140,60,0.25),rgba(180,140,60,0.1))",border:"1px solid "+G.goldB,color:G.gold,padding:"13px 32px",borderRadius:10,cursor:"pointer",fontSize:14,fontFamily:"Cinzel,serif",letterSpacing:"0.1em"}}>&#8595; Download Journal (.txt)</button>
+              <button onClick={exportNotes} style={{background:"linear-gradient(135deg,rgba(176,138,78,0.28),rgba(176,138,78,0.12))",border:"1px solid rgba(176,138,78,0.4)",color:G.gold,padding:"14px 36px",borderRadius:12,cursor:"pointer",fontSize:14,fontFamily:"Cinzel,serif",letterSpacing:"0.1em",boxShadow:"0 4px 16px rgba(0,0,0,0.1)"}}>&#8595; Download Journal (.txt)</button>
             </div>
           </div>
         )}
